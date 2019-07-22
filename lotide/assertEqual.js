@@ -1,7 +1,7 @@
 let assertEqual = function(actual, expected) {
   (actual === expected) ?
-    console.log("🤑️: ",actual," === ",expected)
-    : console.log("🤬️: ",actual," !== ",expected);
+    console.log(`🤑️: ${actual} === ${expected}`)
+    : console.log(`🤬️: ${actual} !== ${expected}`);
 };
 
 assertEqual('Lighthouse Labs', 'Bootcamp');
