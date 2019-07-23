@@ -28,3 +28,7 @@ const eqObjects = function(object1, object2) {
 
 // const cd2 = { c: "1", d: ["2", 3, 4] };
 // console.log(eqObjects(cd, cd2));
+
+module.exports = {
+  eqObjects
+}
