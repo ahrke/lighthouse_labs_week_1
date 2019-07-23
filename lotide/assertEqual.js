@@ -4,9 +4,13 @@ let assertEqual = function(actual, expected) {
     : console.log(`🤬️: ${actual} !== ${expected}`);
 };
 
-assertEqual('Lighthouse Labs', 'Bootcamp');
-assertEqual(1,1);
-assertEqual('bambalaaands','bambalaaands');
-assertEqual('ambidextrous','ambidextros');
-assertEqual(12,12);
-assertEqual(2048,3048);
+// assertEqual('Lighthouse Labs', 'Bootcamp');
+// assertEqual(1,1);
+// assertEqual('bambalaaands','bambalaaands');
+// assertEqual('ambidextrous','ambidextros');
+// assertEqual(12,12);
+// assertEqual(2048,3048);
+
+module.exports = {
+  assertEqual
+}
