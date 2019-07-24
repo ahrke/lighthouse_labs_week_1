@@ -38,10 +38,18 @@ const twits = {
   getUserByName: function(name) {
     let user = {};
     for (let i of Object.keys(this.data)) {
-      if (this.data[i].name === name) user = this.data[i]
+      if (this.data[i].name === name) user = this.data[i];
     }
 
     return user;
+  },
+  getUserByAccount: function(account) {
+    let acc = {};
+    for (let i of Object.keys(this.data)) {
+      if (i === account) acc = this.data[i]
+    }
+
+    return acc;
   },
   biggestFollower: function() {
     return Object.keys(this.data)
@@ -49,8 +57,22 @@ const twits = {
       .sort(sorter())
       .reverse()[0][1];
   }, 
-  getNumOfFollowers: function(name) {
-    return Object.getOwnPropertyNames(this.data).values(name)
+  selectAccountData: function(account, selector) {
+    return this.getUserByAccount(account)[selector]
+  },
+  getFollowers: function(account) {
+    let followers = [];
+
+    for (let i of Object.keys(this.data)) {
+      if (
+        this.getUserByAccount(i).follows.includes(account) 
+        && !followers.includes(this.getUserByAccount(i))
+      ) {
+        followers.push(this.getUserByAccount(i).name);
+      }
+    }
+
+    return followers;
   },
   mostPopular: function() {
     let numberOfFollowersList = [];
@@ -65,12 +87,19 @@ const twits = {
 
     let mostFollowed = Object.entries(numberOfFollowersList).sort((a,b) => a[1] - b[1]).reverse()[0];
     return this.data[mostFollowed[0]].name;
+  },
+  printAll: function() {
+    // outputs a list of everyone and for each of them, the names of who they follow and who follows them
+    Object.keys(this.data).forEach(acc => {
+      let user = this.data[acc]
+      console.log(`${user.name}`)
+      console.log(` Follows: ${user.follows}`)
+      console.log(` Followed By: `)
+    })
   }
 }
 
-const printAll = function() {
 
-}
 
 const unrequitedFollowers = function() {
 
@@ -79,7 +108,9 @@ const unrequitedFollowers = function() {
 console.log(twits.biggestFollower());
 console.log(twits.getUserByName('Debbie').follows);
 console.log(twits.mostPopular())
-console.log(twits.getNumOfFollowers('f02'))
+twits.printAll()
+console.log(twits.selectAccountData('f02','follows'))
+console.log(twits.getFollowers('f06'))
 // Identify who has the most followers over 30
 // Identify who follows the most people over 30
 // List everyone and their reach (sum of # of followers and # of followers of followers)
