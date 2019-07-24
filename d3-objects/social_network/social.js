@@ -60,7 +60,7 @@ const twits = {
       .sort(sorter())
       .reverse()[0][1];
   },
-  getFollowers: function(account) {
+  getFollowers: function(account, option = 'name') {
     let followers = [];
 
     for (let i of this.dataAsArray()) {
@@ -68,7 +68,9 @@ const twits = {
         this.getUserByAccount(i).follows.includes(account) 
         && !followers.includes(this.getUserByAccount(i))
       ) {
-        followers.push(this.getUserByAccount(i).name);
+        let toAdd = this.getUserByAccount(i).name;
+        if (option === 'account') toAdd = i;
+        followers.push(toAdd);
       }
     }
 
@@ -112,6 +114,30 @@ const twits = {
     })
 
     return unrequited;
+  },
+  doTheyFollow: function(acc, target) {
+    return this.getUserByAccount(acc).follows.includes(target)
+  },
+  searchUsersOverAgeOf: function(age) {
+    return this.dataAsArray().filter(acc => this.getUserByAccount(acc).age > age)
+  },
+  mostFollowersOver30: function() {
+    let usersOver30 = this.searchUsersOverAgeOf(30)
+    let followingOver30 = {};
+    this.dataAsArray().forEach(acc => {
+      this.getFollowers(acc,'account').forEach(follower => {
+        if (usersOver30.includes(follower)) {
+          followingOver30[acc]
+            ? followingOver30[acc]++
+            : followingOver30[acc] = 1
+        }
+      })
+    })
+
+    return this.getUserByAccount(
+      Object.keys(followingOver30).map(acc => [followingOver30[acc],acc])
+      .sort((a,b) => a - b).reverse()[0][1])
+      .name
   }
 }
 
@@ -123,7 +149,9 @@ console.log(twits.getUserByName('Debbie').follows);
 console.log(twits.mostPopular())
 twits.printAll()
 console.log(twits.getFollowers('f06'))
+console.log(twits.getFollowers('f06','account'))
 console.log(twits.unrequitedFollowers())
-// Identify who has the most followers over 30
+console.log(twits.searchUsersOverAgeOf(30))
+console.log(twits.mostFollowersOver30())
 // Identify who follows the most people over 30
 // List everyone and their reach (sum of # of followers and # of followers of followers)
