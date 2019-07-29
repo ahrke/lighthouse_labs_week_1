@@ -31,3 +31,7 @@ The following functions are currently implemented:
 * `middle(Array)`: returns the middle elements of given array
 * `flatten(Array)`: returns the a flattened version of given array (works with super nested ones too!)
 * `countOnly(Array, Object)`: Takes in an array, and an object identifying what value to count from the array
+* `letterPositions(String)`: returns an object with each letter from given string, as well as their positions inside the string
+* `findKeyByValue(Object, valueToSearch)`: searches through object for a key with the given valueToSearch. Returns the key
+* `eqArrays(arr1, arr2)`: Takes in two arrays and returns true when both are strictly equal, and false otherwise
+* `eqObjects(obj1, obj2)`: Takes in two objects and returns true when both are strictly equal, and false otherwise

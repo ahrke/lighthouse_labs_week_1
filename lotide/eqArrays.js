@@ -1,5 +1,3 @@
-const assertEqual = require('./assertEqual').assertEqual;
-
 let eqArrays = function(arr1, arr2) {
   if (arr1.length !== arr2.length) return false;
   if (typeof arr1 !== typeof arr2) return false;

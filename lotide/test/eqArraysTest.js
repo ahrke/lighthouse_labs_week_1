@@ -1,4 +1,5 @@
 const eqArrays = require('../eqArrays').eqArrays;
+const flatten = require('../flatten');
 const expect = require('chai').expect;
 
 describe("eqArrays", () => {
@@ -29,14 +30,10 @@ describe("eqArrays", () => {
     let output = false;
     expect(eqArrays(input, input2)).to.equal(output);
   })
+
+  it("should return true when flatten returns correct array", () => {
+    let input = [[1,2],3,4,[[[5]],6],[[7]]];
+    let output = [1,2,3,4,5,6,7];
+    expect(eqArrays(flatten(input),output)).to.eql(true);
+  })
 })
-
-
-// 
-// 
-// assertEqual(eqArrays([1, 2, 5], [1, 2, 3]), false);
-// assertEqual(eqArrays(["a", "b", 10], ["a", "b", 10]), true);
-
-//  // => true
-//  // => false
-// assertEqual(eqArrays([[2, 3], [4]], [[2, 3], 4]), false) // => false
