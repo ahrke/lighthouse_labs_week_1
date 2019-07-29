@@ -1,7 +1,11 @@
 let assertEqual = function(actual, expected) {
-  (actual === expected) ?
+  if (actual === expected) {
     console.log(`🤑️: ${actual} === ${expected}`)
-    : console.log(`🤬️: ${actual} !== ${expected}`);
+    return true;
+  } else {
+    console.log(`🤬️: ${actual} !== ${expected}`);
+    return false;
+  }
 };
 
 
