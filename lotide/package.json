@@ -1,0 +1,20 @@
+{
+  "name": "@ahrke/lotide",
+  "version": "1.0.0",
+  "description": "a copy of lodash for learning purposes",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "^4.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "ahrke (David Nguyen)",
+  "license": "ISC"
+}
